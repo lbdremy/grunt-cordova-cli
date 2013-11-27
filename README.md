@@ -41,49 +41,65 @@ grunt.initConfig({
 Type: `String`
 Default value: `empty string`
 
-A string value that is used to do something with whatever.
+Name of the Cordova command to execute. E.g: "emulate", "build", "prepare", "compile", "run", "create", "serve", "platform", "plugin"
 
 #### options.subcommand
 Type: `String`
-Default value: `èmpty string`
+Default value: `empty string`
 
-A string value that is used to do something else with whatever else.
+#### options.options
+Type: `Array`
+Default value: `[]`
+
+List of options to alter the behavior of the Cordova command specified by `cmd`.
+
+#### options.platforms
+Type: `Array`
+Default value: `[]`
+
+List of targeted platforms by the `cmd`. E.g: "android", "ios" ...
+
+#### options.plugins
+Type: `Array`
+Default value: `[]`
+
+List of targeted plugins by the `cmd`, either "platform" or "plugin" with the `subcommand` "add" or "rm". E.g: "org.apache.cordova.contacts" , "org.apache.cordova.statusbar"
+
+Name of the Cordova sub-command to execute. E.g: "add" or "rm" only for the `cmd` "platform" and "plugin"
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Deploy the cordova app to an android phone
+**Important**: the current working directory of the task should be the root folder containing the `www`, `platforms`, `plugins` folder.
 
 ```js
 grunt.initConfig({
   cordova_cli: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
+    options : {
+      cmd : 'run',
+      platforms : [ 'android' ]
+    }
+  }
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Deploy the cordova app to an android emulator
+**Important**: the current working directory of the task should be the root folder containing the `www`, `platforms`, `plugins` folder.
 
 ```js
 grunt.initConfig({
   cordova_cli: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    options : {
+      cmd : 'emulate',
+      platforms : [ 'android' ]
+    }
+  }
 });
 ```
+
+**N.B:** Have a look to the tasks inside the `Gruntfile.js` of this repo you will find more usage examples for the task `cordova_cli`.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+Look at the commit history, thanks.
