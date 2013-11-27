@@ -70,7 +70,7 @@ Name of the Cordova sub-command to execute. E.g: "add" or "rm" only for the `cmd
 ### Usage Examples
 
 #### Deploy the cordova app to an android phone
-**Important**: the current working directory of the task should be the root folder containing the `www`, `platforms`, `plugins` folder.
+**Important**: the current working directory of the task should be the root folder containing the `www`, `platforms`, `plugins` folder. Also you need the Android SDK properly installed see more [here](http://cordova.apache.org/docs/en/3.2.0/guide_platforms_index.md.html#Platform%20Guides) and the environment variables `JAVA_HOME` and `ANDROID_HOME` set in your current environment.
 
 ```js
 grunt.initConfig({
@@ -83,7 +83,7 @@ grunt.initConfig({
 ```
 
 #### Deploy the cordova app to an android emulator
-**Important**: the current working directory of the task should be the root folder containing the `www`, `platforms`, `plugins` folder.
+**Important**: the current working directory of the task should be the root folder containing the `www`, `platforms`, `plugins` folder. Also you need the Android SDK properly installed see more [here](http://cordova.apache.org/docs/en/3.2.0/guide_platforms_index.md.html#Platform%20Guides) and the environment variables `JAVA_HOME` and `ANDROID_HOME` set in your current environment.
 
 ```js
 grunt.initConfig({
