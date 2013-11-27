@@ -25,17 +25,74 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['tmp', '{plugins,platforms}/*'],
     },
 
     // Configuration to be run (and then tested).
     cordova_cli: {
-      // TODO Add examples
+      install_plugin : {
+        options : {
+          cmd : 'plugin',
+          subcommand : 'add',
+          plugins : ['org.apache.cordova.statusbar']
+        }
+      },
+      install_platform : {
+        options : {
+          cmd : 'platform',
+          subcommand : 'add',
+          platforms : ['android']
+        }
+      },
+      // run_android : {
+      //   options : {
+      //     cmd : 'run',
+      //     platforms : [ 'android' ]
+      //   }
+      // },
+      // emulate_android : {
+      //   options : {
+      //     cmd : 'emulate',
+      //     platforms : [ 'android' ]
+      //   }
+      // },
+      prepare_android : {
+        options : {
+          cmd : 'prepare',
+          platforms : [ 'android' ]
+        }
+      },
+      build_android : {
+        options : {
+          cmd : 'build',
+          platforms : [ 'android' ]
+        }
+      },
+      compile_android : {
+        options : {
+          cmd : 'compile',
+          platforms : [ 'android' ]
+        }
+      },
+      // remove_plugin : {
+      //   options : {
+      //     cmd : 'plugin',
+      //     subcommand : 'rm',
+      //     plugins : ['org.apache.cordova.statusbar']
+      //   }
+      // },
+      // remove_platform : {
+      //   options : {
+      //     cmd : 'platform',
+      //     subcommand : 'rm',
+      //     platforms : ['android']
+      //   }
+      // }
     },
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js'],
+      tests: ['{test/,../}*_test.js'],
     },
 
   });
@@ -50,7 +107,10 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'cordova_cli', 'nodeunit']);
+  grunt.registerTask('test', function(){
+    grunt.file.setBase('test/Baz/');
+    grunt.task.run(['clean', 'cordova_cli', 'nodeunit']);
+  });
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
