@@ -27,16 +27,13 @@ module.exports = function (grunt) {
         });
 
         var self = this;
-        var done = function(){
-            self.async();
+        var done = function done(){
+            var done = self.async();
             return function over(){
-                grunt.log.writeln(cmd + ' command run successfully.');
+                grunt.log.writeln('The Cordova command "' + cmd + '" run successfully.');
+                done();
             };
         };
-
-        function done(){
-
-        }
 
         var cmd = options.cmd;
         if (cordova.hasOwnProperty(cmd)) {
@@ -47,19 +44,17 @@ module.exports = function (grunt) {
                 };
                 cordova.raw[cmd].call(null, opts).done(done());
             }else if (cmd === 'create' || cmd === 'serve'){
-                throw new Error('Cordova commands "' + cmd + '" is not supported by the plugin. Pull request welcome.');
+                throw new Error('The Cordova command "' + cmd + '" is not supported by the plugin. Pull request welcome.');
             }else{
                 // platform/plugins add/rm [target(s)]
                 var invocation = [options.subcommand]; // this has the sub-command, i.e. "platform add" or "plugin rm"
-                var targets = options.plaforms.length > 0 ? options.plaforms: options.plugins; // this should be an array of targets, be it platforms or plugins
+                var targets = options.platforms.length > 0 ? options.platforms : options.plugins; // this should be an array of targets, be it platforms or plugins
                 invocation.push(targets);
                 cordova.raw[cmd].apply(null, invocation).done(done());
             }
         }else{
             throw new Error('Cordova does not know command "' + cmd + '".');
         }
-
-
 
     });
 
