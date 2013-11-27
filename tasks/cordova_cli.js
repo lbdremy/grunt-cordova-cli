@@ -28,10 +28,10 @@ module.exports = function (grunt) {
 
         var self = this;
         var done = function done(){
-            var done = self.async();
+            var callback = self.async();
             return function over(){
                 grunt.log.writeln('The Cordova command "' + cmd + '" run successfully.');
-                done();
+                callback();
             };
         };
 
